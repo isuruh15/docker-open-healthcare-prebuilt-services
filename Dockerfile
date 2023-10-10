@@ -9,11 +9,11 @@ ARG RELEASE_TAG="v2tofhirr4-v1.0.1"
 
 ARG RELEASE_URL="https://api.github.com/repos/wso2/open-healthcare-prebuilt-services/releases/tags/${RELEASE_TAG}"
 
-# Download the Hl7v2ToFhirR4.jar from the release
-RUN V2TOFHIR_URL=$(curl -sL "${RELEASE_URL}" | jq -r '.assets[] | select(.name == "Hl7v2ToFhirR4.jar") | .url') && \
+# Download the Hl7v2ToFhirR4Service.jar from the release
+RUN V2TOFHIR_URL=$(curl -sL "${RELEASE_URL}" | jq -r '.assets[] | select(.name == "Hl7v2ToFhirR4Service.jar") | .url') && \
     curl -sLJO -H "Accept: application/octet-stream" "${V2TOFHIR_URL}"
 
-RUN cp Hl7v2ToFhirR4.jar /home/ballerina/Hl7v2ToFhirR4.jar
+RUN cp Hl7v2ToFhirR4Service.jar /home/ballerina/Hl7v2ToFhirR4Service.jar
 
 RUN adduser \
     --disabled-password \
@@ -29,4 +29,4 @@ WORKDIR /home/ballerina
 EXPOSE  9090
 USER 10014
 
-CMD java -jar 'Hl7v2ToFhirR4.jar'
+CMD java -jar 'Hl7v2ToFhirR4Service.jar'
